@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import HomePage from "../components/HomePage";
 
 export const metadata: Metadata = {
-  title: "React Exercise",
+  title: "React Exercise (Sameer)",
   description: "Exercise to flex your react muscles",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };

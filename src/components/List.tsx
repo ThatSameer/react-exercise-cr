@@ -1,29 +1,55 @@
 "use client";
 
-import { Text } from "@cruk/cruk-react-components";
-import { NasaResponse, NasaSearchParams } from "../types";
-import { urlNasaSearch } from "../services/nasa";
+import { ErrorText, Loader, Text } from "@cruk/cruk-react-components";
 import { useQuery } from "@tanstack/react-query";
+import { urlNasaSearch } from "../services/nasa";
+import { NasaResponse, NasaSearchParams } from "../types";
+import { ListGrid } from "./ListGrid/ListGrid";
+import gridMapper from "../helpers/gridMapper";
+import { useEffect } from "react";
 
-export function List() {
+export function List({
+  params,
+  setIsFetching,
+}: {
+  params: NasaSearchParams;
+  setIsFetching: (fetching: boolean) => void;
+}) {
+  const pageSize = 10;
+
   const values: NasaSearchParams = {
-    keywords: "moon",
-    mediaType: "audio",
-    yearStart: 2000,
+    keywords: params.keywords,
+    mediaType: params.mediaType,
+    yearStart: params.yearStart,
+    pageSize,
   };
 
   const urlNasaSearchUrl = values
     ? urlNasaSearch(values as NasaSearchParams)
     : "";
 
-  console.log(urlNasaSearchUrl);
-
-  const { data } = useQuery<NasaResponse>(
+  const { data, isFetching, error } = useQuery<NasaResponse>(
     ["nasaSearch", values],
     () => fetch(urlNasaSearchUrl).then((res) => res.json()),
-    { enabled: !!urlNasaSearchUrl.length },
+    { enabled: !!urlNasaSearchUrl.length }
   );
 
-  // TODO somehow render results
-  return <>{!!data && <Text>{JSON.stringify(data)}</Text>}</>;
+  useEffect(() => {
+    console.log("im here");
+    setIsFetching(isFetching);
+  }, [isFetching, setIsFetching]);
+
+  if (isFetching) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <ErrorText>Something went wrong. Please try again later.</ErrorText>;
+  }
+
+  if (!data?.collection?.items?.length) {
+    return <Text>No results found.</Text>;
+  }
+
+  return <>{!isFetching && <ListGrid items={gridMapper(data)} />}</>;
 }

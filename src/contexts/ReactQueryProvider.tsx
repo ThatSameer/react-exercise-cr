@@ -16,7 +16,7 @@ export const ReactQueryProvider = ({
             refetchOnMount: true,
           },
         },
-      }),
+      })
   );
 
   return (

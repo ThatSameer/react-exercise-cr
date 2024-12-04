@@ -1,7 +1,8 @@
 export type NasaSearchParams = {
   keywords: string;
-  yearStart: number;
+  yearStart?: number;
   mediaType: "audio" | "video" | "image";
+  pageSize?: number;
 };
 
 export type NasaResponse = {
@@ -9,6 +10,9 @@ export type NasaResponse = {
     version: string;
     href: string;
     items: ItemsType[];
+    metadata: {
+      total_hits: number;
+    };
   };
 };
 
@@ -25,7 +29,7 @@ export type DataType = {
   location: string;
   nasa_id: string;
   date_created: string;
-  media_type: string;
+  media_type: "audio" | "video" | "image";
   description: string;
 };
 
@@ -33,4 +37,12 @@ export type LinkType = {
   href: string;
   rel: string;
   render: string;
+};
+
+export type GridItemType = {
+  src: string;
+  title: string;
+  description: string;
+  mediaType: "image" | "video" | "audio";
+  nasaId: string;
 };
