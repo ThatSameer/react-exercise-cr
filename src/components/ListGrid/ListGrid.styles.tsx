@@ -129,6 +129,7 @@ export const HoverText = styled(Text).attrs(() => ({
 }))`
   overflow-y: auto;
   max-height: 120px;
+  max-width: 100%;
 `;
 
 export const MobileText = styled(Text)`
