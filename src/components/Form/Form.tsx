@@ -59,7 +59,6 @@ export function Form({
   } = formProps;
 
   const onSubmit: SubmitHandler<FormValues> = async (data): Promise<void> => {
-    console.log({ data });
     setValues({
       keywords: data.keywords,
       mediaType: data.mediaType,

@@ -35,7 +35,6 @@ export function List({
   );
 
   useEffect(() => {
-    console.log("im here");
     setIsFetching(isFetching);
   }, [isFetching, setIsFetching]);
 

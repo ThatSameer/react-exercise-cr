@@ -1,5 +1,19 @@
 # CRUK technical exercise (React)
 
+## Sameer's comments
+
+### Vercel deployment
+
+A live version of this app can be viewed on Vercel:
+
+[VERCEL LINK](https://react-exercise-cr.vercel.app/)
+
+### Project board
+
+A GitHub project board was used to breakdown and keep track of tasks, and to document future tasks if time permitted:
+
+[PROJECT BOARD](https://github.com/users/ThatSameer/projects/4/views/1)
+
 ## Task details
 
 - We will be testing your ability to understand an existing React/Typescript codebase, find what is already built, and what is not.
